@@ -2,6 +2,8 @@
 
 This repository contains examples highlighting the differences between FIPS and non-FIPS enabled containers. Both applications are simple Python Flask applications. The key difference is the inclusion of the FIPS non-compliant md5 package in the fips-non-compliant application.
 
+There is also a client-server example that shows how a client deployed to a FIPS-enabled cluster can only communicate with a FIPS-compliant server.
+
 ## Prerequisites
 
 - An OpenShift cluster (either FIPS-enabled or non-enabled)
@@ -24,7 +26,7 @@ Compare the applications side by side to see the differences between FIPS and no
 
 ### FIPS Compliant Application
 
-A standard FIPS-compliant application deployed to a FIPS non-compliant cluster will work out of the box, as FIPS is not actually being enforced. The application will look like the following:
+A simple FIPS-compliant application deployed to a FIPS non-compliant cluster will work out of the box, as FIPS is not actually being enforced. The application will look like the following:
 
 ![FIPS Compliant](images/fips-compliant_app.png)
 
@@ -34,7 +36,7 @@ With the following output (expected: a SHA256 hash):
 
 ### FIPS Non-Compliant Application
 
-A standard FIPS-non-compliant application deployed to a FIPS non-compliant cluster will work out of the box and could look like the following:
+A simple FIPS-non-compliant application deployed to a FIPS non-compliant cluster will work out of the box and could look like the following:
 
 ![FIPS Non-Compliant](images/fips-non-compliant_app.png)
 
@@ -42,11 +44,31 @@ With the following output (expected: an MD5 hash):
 
 ![FIPS Non-Compliant](images/fips-non-compliant-output.png)
 
+### FIPS Compliant Client-Server Communication
+
+A simple FIPS-compliant application deployed to a FIPS non-compliant cluster should work out of the box, as FIPS is not being enforced. The application will look like the following:
+
+<!-- ![FIPS Compliant](images/fips-compliant_app.png) #TODO -->
+
+With the following output (expected: a SHA256 hash):
+
+<!-- ![FIPS Compliant](images/fips-compliant-output.png) #TODO -->
+
+### FIPS Non-Compliant Client-Server Communication
+
+A simple FIPS-non-compliant application deployed to a FIPS non-compliant cluster should also work out of the box and could look like the following:
+
+<!-- ![FIPS Non-Compliant](images/fips-non-compliant_app.png) #TODO -->
+
+With the following output (expected: an MD5 hash):
+
+<!-- ![FIPS Non-Compliant](images/fips-non-compliant-output.png) #TODO -->
+
 ## FIPS-Enabled Cluster
 
 ### FIPS Compliant Application
 
-A standard FIPS-compliant application deployed to a FIPS-enabled cluster will continue to work as expected. The application output may look like the following:
+A simple FIPS-compliant application deployed to a FIPS-enabled cluster will continue to work as expected. The application output may look like the following:
 
 ![FIPS Compliant](images/fips-compliant-output.png)
 
@@ -55,3 +77,15 @@ A standard FIPS-compliant application deployed to a FIPS-enabled cluster will co
 A standard FIPS-non-compliant application deployed to a FIPS-enabled cluster will fail to run the desired command, as the `MD5` package is not FIPS compliant. The application output will look like the following:
 
 ![FIPS Non-Compliant](images/fips-non-compliant-app_output.png)
+
+### FIPS Compliant Client-Server Communication
+
+A simple FIPS-compliant application deployed to a FIPS-enabled cluster will continue to work as expected. The application output may look like the following:
+
+<!-- ![FIPS Compliant](images/fips-compliant-output.png) #TODO -->
+
+### FIPS Non-Compliant Client-Server Communication
+
+A simple FIPS-non-compliant application deployed to a FIPS-enabled cluster should fail to run the desired command, as the cipher suite used in communication with the server is not FIPS compliant. The application output will look like the following:
+
+<!-- ![FIPS Non-Compliant](images/fips-non-compliant-app_output.png) #TODO -->
